@@ -1,0 +1,154 @@
+{
+  "info": {
+    "_postman_id": "f1a321c9-5a23-4cb4-b01a-83c9f2f1f8b3",
+    "name": "Music Platform API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "almaz"
+  },
+  "item": [
+    {
+      "name": "Songs",
+      "item": [
+        {
+          "name": "Get All Songs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "http://localhost:3000/api/songs", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "songs"] }
+          }
+        },
+        {
+          "name": "Get Song by ID",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3000/api/songs/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "songs", "1"] }
+          }
+        },
+        {
+          "name": "Add Song",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Shape of You\",\n  \"artist_id\": 1,\n  \"duration\": 240,\n  \"genre\": \"Pop\"\n}"
+            },
+            "url": { "raw": "http://localhost:3000/api/songs", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "songs"] }
+          }
+        },
+        {
+          "name": "Update Song",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Perfect\",\n  \"artist_id\": 1,\n  \"duration\": 265,\n  \"genre\": \"Pop\"\n}"
+            },
+            "url": { "raw": "http://localhost:3000/api/songs/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "songs", "1"] }
+          }
+        },
+        {
+          "name": "Delete Song",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "http://localhost:3000/api/songs/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "songs", "1"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Artists",
+      "item": [
+        {
+          "name": "Get All Artists",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3000/api/artists", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "artists"] }
+          }
+        },
+        {
+          "name": "Add Artist",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ed Sheeran\",\n  \"country\": \"UK\",\n  \"debut_year\": 2011\n}"
+            },
+            "url": { "raw": "http://localhost:3000/api/artists", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "artists"] }
+          }
+        },
+        {
+          "name": "Update Artist",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ed Sheeran\",\n  \"country\": \"England\",\n  \"debut_year\": 2011\n}"
+            },
+            "url": { "raw": "http://localhost:3000/api/artists/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "artists", "1"] }
+          }
+        },
+        {
+          "name": "Delete Artist",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "http://localhost:3000/api/artists/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "artists", "1"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Playlists",
+      "item": [
+        {
+          "name": "Get All Playlists",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3000/api/playlists", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "playlists"] }
+          }
+        },
+        {
+          "name": "Add Playlist",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Top Hits\",\n  \"description\": \"Best songs of 2025\"\n}"
+            },
+            "url": { "raw": "http://localhost:3000/api/playlists", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "playlists"] }
+          }
+        },
+        {
+          "name": "Add Song to Playlist",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"song_id\": 1\n}"
+            },
+            "url": { "raw": "http://localhost:3000/api/playlists/1/songs", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "playlists", "1", "songs"] }
+          }
+        },
+        {
+          "name": "Get Playlist with Songs",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3000/api/playlists/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "playlists", "1"] }
+          }
+        },
+        {
+          "name": "Delete Playlist",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "http://localhost:3000/api/playlists/1", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "playlists", "1"] }
+          }
+        }
+      ]
+    }
+  ]
+}
