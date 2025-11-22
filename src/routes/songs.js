@@ -1,21 +1,44 @@
 import express from "express";
 import { openDb } from "../db/database.js";
-import { authenticateToken } from '../middleware/authMiddleware.js';
+import songFilterSortMiddleware from "../middleware/songFilterSortMiddleware.js";
 
 const router = express.Router();
-router.use(authenticateToken);
+// router.use(authenticateToken);
 
 // Барлық әндерді алу
-router.get("/", async (req, res) => {
-  const db = await openDb();
-  const songs = await db.all("SELECT * FROM songs");
-  res.json(songs);
+router.get("/", songFilterSortMiddleware, async (req, res) => {
+  try {
+    const db = await openDb();
+
+    let sql = "SELECT * FROM songs";
+    let params = [];
+
+    // Фильтр по жанру
+    if (req.genre) {
+      sql += " WHERE genre = ?";
+      params.push(req.genre);
+    }
+
+    // Сортировка
+    sql += ` ORDER BY ${req.orderBy}`;
+
+    const songs = await db.all(sql, params);
+    res.json(songs);
+  } catch (error) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+  // const db = await openDb();
+  // const songs = await db.all("SELECT * FROM songs");
+  // res.json(songs);
 });
 
 // Бір әнді алу
 router.get("/:id", async (req, res) => {
   const db = await openDb();
-  const song = await db.get("SELECT * FROM songs WHERE id = ?", [req.params.id]);
+  const song = await db.get("SELECT * FROM songs WHERE id = ?", [
+    req.params.id,
+  ]);
   if (song) res.json(song);
   else res.status(404).json({ error: "Ән табылмады" });
 });
@@ -30,7 +53,9 @@ router.post("/", async (req, res) => {
     "INSERT INTO songs (title, artist_id, duration, genre) VALUES (?, ?, ?, ?)",
     [title, artist_id, duration, genre]
   );
-  res.status(201).json({ id: result.lastID, title, artist_id, duration, genre });
+  res
+    .status(201)
+    .json({ id: result.lastID, title, artist_id, duration, genre });
 });
 
 // Әнді жаңарту
